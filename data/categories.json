@@ -1,0 +1,22 @@
+[
+  {
+    "name": "Technology",
+    "slug": "technology",
+    "description": "Latest trends in technology, AI, and software development"
+  },
+  {
+    "name": "Business",
+    "slug": "business",
+    "description": "Business strategies, entrepreneurship, and growth"
+  },
+  {
+    "name": "Startups",
+    "slug": "startups",
+    "description": "Startup insights, funding, and success stories"
+  },
+  {
+    "name": "Innovation",
+    "slug": "innovation",
+    "description": "Innovative ideas and emerging trends"
+  }
+]
