@@ -33,11 +33,11 @@ export const localPosts = [
 
 /**
  * Fetch posts from CMS API (Vercel, Contentful, Sanity, etc.)
- * Replace `process.env.CMS_API_URL` with your actual API endpoint.
+ * Uses NEXT_PUBLIC_API_BASE from .env.local
  */
 export async function fetchPostsFromCMS() {
   try {
-    const res = await fetch(process.env.CMS_API_URL);
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE}/posts`);
     if (!res.ok) throw new Error("Failed to fetch posts from CMS");
     const data = await res.json();
     return data.posts || [];
@@ -60,8 +60,16 @@ export async function getAllPosts() {
  * Get a single post by slug
  */
 export async function getPostBySlug(slug) {
-  const posts = await getAllPosts();
-  return posts.find((post) => post.slug === slug);
+  try {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE}/posts/${slug}`);
+    if (!res.ok) throw new Error("Failed to fetch post from CMS");
+    const data = await res.json();
+    return data.post || null;
+  } catch (error) {
+    console.error("CMS fetch error:", error);
+    const posts = await getAllPosts();
+    return posts.find((post) => post.slug === slug);
+  }
 }
 
 /**
