@@ -1,4 +1,3 @@
-import { useRouter } from 'next/router';
 import { format } from 'date-fns';
 import Layout from '../../components/layout/Layout';
 import SEO from '../../components/seo/SEO';
@@ -6,8 +5,6 @@ import { posts } from '../../data/posts';
 import styles from '../../styles/PostContent.module.css';
 
 export default function Post({ post }) {
-  const router = useRouter();
-
   if (!post) {
     return (
       <Layout>
@@ -47,6 +44,13 @@ export default function Post({ post }) {
                 </div>
               </div>
             </div>
+
+            {/* ✅ Cover Image added inline */}
+            <img
+              src={post.coverImage}
+              alt={post.title}
+              className={styles.coverImage}
+            />
           </header>
 
           <div className={styles.content}>
