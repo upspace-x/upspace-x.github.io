@@ -1,0 +1,132 @@
+/* ============================================
+   FILE: styles/Footer.module.css
+   ============================================ */
+
+.footer {
+  background: var(--gray-900);
+  color: var(--gray-300);
+  padding: var(--spacing-3xl) 0 var(--spacing-xl);
+  margin-top: var(--spacing-3xl);
+}
+
+.container {
+  padding: 0 var(--spacing-lg);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: var(--spacing-2xl);
+  margin-bottom: var(--spacing-2xl);
+}
+
+.about h3 {
+  color: var(--white);
+  margin-bottom: var(--spacing-md);
+  font-size: 1.5rem;
+}
+
+.about p {
+  color: var(--gray-400);
+  line-height: 1.6;
+}
+
+.social {
+  display: flex;
+  gap: var(--spacing-md);
+  margin-top: var(--spacing-lg);
+}
+
+.social a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--gray-800);
+  color: var(--gray-300);
+  transition: all var(--transition-fast);
+}
+
+.social a:hover {
+  background: var(--primary);
+  color: var(--white);
+  transform: translateY(-2px);
+}
+
+.links h4 {
+  color: var(--white);
+  margin-bottom: var(--spacing-md);
+  font-size: 1.125rem;
+}
+
+.links a {
+  display: block;
+  color: var(--gray-400);
+  margin-bottom: var(--spacing-sm);
+  transition: color var(--transition-fast);
+}
+
+.links a:hover {
+  color: var(--primary);
+}
+
+.newsletter h4 {
+  color: var(--white);
+  margin-bottom: var(--spacing-md);
+}
+
+.newsletter p {
+  color: var(--gray-400);
+  margin-bottom: var(--spacing-md);
+}
+
+.form {
+  display: flex;
+  gap: var(--spacing-sm);
+}
+
+.form input {
+  flex: 1;
+  padding: var(--spacing-sm) var(--spacing-md);
+  border: 1px solid var(--gray-700);
+  border-radius: var(--radius-md);
+  background: var(--gray-800);
+  color: var(--white);
+  font-size: 0.875rem;
+}
+
+.form input:focus {
+  outline: none;
+  border-color: var(--primary);
+}
+
+.form button {
+  padding: var(--spacing-sm) var(--spacing-lg);
+  background: var(--primary);
+  color: var(--white);
+  border: none;
+  border-radius: var(--radius-md);
+  font-weight: 600;
+  cursor: pointer;
+  transition: background var(--transition-fast);
+}
+
+.form button:hover {
+  background: var(--primary-dark);
+}
+
+.bottom {
+  border-top: 1px solid var(--gray-800);
+  padding-top: var(--spacing-lg);
+  text-align: center;
+  color: var(--gray-500);
+  font-size: 0.875rem;
+}
+
+@media (max-width: 768px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}
