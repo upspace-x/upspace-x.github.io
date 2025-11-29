@@ -1,43 +1,19 @@
-# 🚀 UpSpace - Modern Blog Platform
+# UpSpace 🚀
 
-A fully functional, SEO-optimized blog platform built with Next.js 14, featuring responsive design, pagination, categories, and newsletter integration.
+A modern blog and content platform built with **Next.js**, styled with **CSS Modules**, and powered by a clean design system.
 
-## ✨ Features
+## 🔧 Tech Stack
+- Next.js 13+
+- React 18
+- CSS Modules
+- Custom Design Tokens (`variables.css`)
+- Modular Components (Header, Footer, PostCard, etc.)
 
-- 📱 Fully responsive design  
-- 🎨 Modern, clean UI with CSS modules  
-- 🔍 SEO optimized with meta tags  
-- 📝 Blog with categories and tags  
-- 👤 Author profiles  
-- 🔎 Search functionality  
-- 📧 Newsletter subscription  
-- 🌐 Multi-language support ready  
-- ⚡ Fast performance with Next.js  
-
-## 🚀 Quick Start
+## 📦 Setup
 
 ```bash
 # Install dependencies
 npm install
 
-# Run development server
+# Start development server
 npm run dev
-
-# Build for production
-npm run build
-
-# Start production server
-npm start
-
-📁 Project Structure
-
-See complete file structure in documentation.
-
-🛠️ Tech Stack
-
-- Next.js 14  
-- React 18  
-- CSS Modules  
-- date-fns  
-- react-icons  
-- next-auth  
