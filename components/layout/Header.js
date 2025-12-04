@@ -13,7 +13,7 @@ const Header = () => {
       <header className={styles.header}>
         <div className={`container ${styles.container}`}>
           <Link href="/" className={styles.logo}>
-            <span className={styles.logoText}>UpSpace</span>
+            <span className={styles.logoText}>UpSpaceX</span>
           </Link>
 
           <nav className={`${styles.nav} ${menuOpen ? styles.navOpen : ''}`}>
