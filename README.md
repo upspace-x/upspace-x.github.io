@@ -1,4 +1,4 @@
-# UpSpace 🚀
+# UpSpaceX 🚀
 
 A modern blog and content platform built with **Next.js**, styled with **CSS Modules**, and powered by a clean design system.
 
