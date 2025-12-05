@@ -81,7 +81,7 @@
   --animation-speed: 0.5s;
 
   /* 🔹 Container */
-  --container-max: 1280px;
+  --container-max: 1200px; /* ✅ locked at 1200px */
 
   /* 🔹 Z-index scale */
   --z-header: 1000;
