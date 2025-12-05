@@ -15,10 +15,12 @@ export default function Post({ post }) {
   if (router.isFallback) {
     return (
       <Layout showSidebar={true}>
-        <div className="container" style={{ padding: '4rem 0', textAlign: 'center' }}>
-          <h1>Loading…</h1>
-          <p>We’re preparing this article for you.</p>
-        </div>
+        <section className={`${styles.section}`}>
+          <div className="container" style={{ textAlign: 'center' }}>
+            <h1>Loading…</h1>
+            <p>We’re preparing this article for you.</p>
+          </div>
+        </section>
       </Layout>
     );
   }
@@ -27,10 +29,12 @@ export default function Post({ post }) {
   if (!post) {
     return (
       <Layout showSidebar={true}>
-        <div className="container" style={{ padding: '4rem 0', textAlign: 'center' }}>
-          <h1>Post not found</h1>
-          <p>The article you're looking for doesn't exist.</p>
-        </div>
+        <section className={`${styles.section}`}>
+          <div className="container" style={{ textAlign: 'center' }}>
+            <h1>Post not found</h1>
+            <p>The article you're looking for doesn't exist.</p>
+          </div>
+        </section>
       </Layout>
     );
   }
@@ -44,7 +48,8 @@ export default function Post({ post }) {
         article={true}
       />
 
-      <article className={styles.article}>
+      {/* ✅ Apply section utility */}
+      <article className={`${styles.section} ${styles.article}`}>
         <div className="container">
           <header className={styles.header}>
             {/* ✅ Category badge */}
