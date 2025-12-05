@@ -21,13 +21,13 @@ export default function Blog() {
   }, [page]);
   
   // ✅ Filter posts by search query
-  const filteredPosts = search ?
-    posts.filter(post =>
-      post.title.toLowerCase().includes(search.toLowerCase()) ||
-      post.excerpt.toLowerCase().includes(search.toLowerCase()) ||
-      post.content.toLowerCase().includes(search.toLowerCase())
-    ) :
-    posts;
+  const filteredPosts = search
+    ? posts.filter(post =>
+        post.title.toLowerCase().includes(search.toLowerCase()) ||
+        post.excerpt.toLowerCase().includes(search.toLowerCase()) ||
+        post.content.toLowerCase().includes(search.toLowerCase())
+      )
+    : posts;
   
   // ✅ Calculate pagination
   const totalPages = Math.ceil(filteredPosts.length / POSTS_PER_PAGE);
@@ -51,7 +51,8 @@ export default function Blog() {
         description="Explore articles on technology, business, education, careers, sports, lifestyle, health, and opinion."
       />
 
-      <div className={styles.blog}>
+      {/* ✅ Apply section utility */}
+      <section className={`${styles.section} ${styles.blog}`}>
         <div className="container">
           <header className={styles.header}>
             <h1>Latest Articles</h1>
@@ -85,7 +86,7 @@ export default function Blog() {
             </div>
           )}
         </div>
-      </div>
+      </section>
     </Layout>
   );
 }
