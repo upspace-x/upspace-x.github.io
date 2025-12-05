@@ -67,16 +67,9 @@ img {
 /* 🔹 Container */
 .container {
   width: 100%;
-  max-width: 1200px;   /* ✅ Constrain width for all devices */
+  max-width: var(--container-max);
   margin: 0 auto;
   padding: 0 var(--spacing-lg);
-}
-
-/* Optional: wider screens */
-@media (min-width: 1600px) {
-  .container {
-    max-width: 1400px; /* ✅ Slightly wider but still constrained */
-  }
 }
 
 /* 🔹 Responsive Typography */
@@ -85,10 +78,6 @@ img {
   h2 { font-size: 1.75rem; }
   h3 { font-size: 1.5rem; }
   h4 { font-size: 1.25rem; }
-
-  .container {
-    padding: 0 var(--spacing-md); /* ✅ tighter padding on mobile */
-  }
 }
 
 /* 🔹 Utility Classes */
