@@ -1,17 +1,28 @@
+/* ============================================
+   FILE: styles/Button.module.css
+   ============================================ */
+
 .button {
-  padding: var(--spacing-md) var(--spacing-xl);
+  padding: 0.75rem 1.5rem;
+  min-height: 48px;
   border: none;
   border-radius: var(--radius-md);
   font-weight: 600;
-  font-size: 1rem;
+  font-size: clamp(0.95rem, 2vw, 1rem);
   cursor: pointer;
-  transition: all var(--transition-fast);
+  transition: background var(--transition-fast),
+              transform var(--transition-fast),
+              box-shadow var(--transition-fast),
+              color var(--transition-fast),
+              border-color var(--transition-fast);
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: var(--spacing-sm);
+  text-align: center;
 }
 
+/* ✅ Primary Button */
 .primary {
   background: var(--primary);
   color: var(--white);
@@ -23,15 +34,28 @@
   box-shadow: var(--shadow-md);
 }
 
+.primary:focus {
+  outline: 3px solid var(--primary-light);
+  outline-offset: 2px;
+}
+
+/* ✅ Secondary Button */
 .secondary {
-  background: var(--gray-200);
-  color: var(--gray-900);
+  background: var(--card-bg); /* theme-aware */
+  color: var(--text-color);   /* theme-aware */
+  border: 1px solid var(--border-color);
 }
 
 .secondary:hover:not(:disabled) {
-  background: var(--gray-300);
+  background: var(--background); /* subtle theme-aware hover */
 }
 
+.secondary:focus {
+  outline: 3px solid var(--border-color);
+  outline-offset: 2px;
+}
+
+/* ✅ Outline Button */
 .outline {
   background: transparent;
   border: 2px solid var(--primary);
@@ -43,11 +67,20 @@
   color: var(--white);
 }
 
+.outline:focus {
+  outline: 3px solid var(--primary-light);
+  outline-offset: 2px;
+}
+
+/* ✅ Disabled State */
 .button:disabled {
   opacity: 0.6;
   cursor: not-allowed;
+  box-shadow: none;
+  transform: none;
 }
 
+/* ✅ Full Width Utility */
 .fullWidth {
   width: 100%;
 }

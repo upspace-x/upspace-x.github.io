@@ -5,13 +5,14 @@
 .sidebar {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-xl);
+  gap: clamp(1.5rem, 4vw, 2.5rem); /* fluid gap */
 }
 
 /* ✅ Widget container */
 .widget {
-  background: var(--white);
-  padding: var(--spacing-xl);
+  background: var(--card-bg); /* theme-aware */
+  color: var(--text-color);
+  padding: clamp(1rem, 3vw, 1.5rem);
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-sm);
   transition: transform var(--transition-fast), box-shadow var(--transition-fast);
@@ -23,9 +24,9 @@
 }
 
 .widgetTitle {
-  font-size: 1.25rem;
+  font-size: clamp(1.125rem, 2.5vw, 1.25rem);
   margin-bottom: var(--spacing-lg);
-  color: var(--gray-900);
+  color: var(--text-color); /* theme-aware */
   border-bottom: 2px solid var(--primary);
   padding-bottom: var(--spacing-sm);
   font-weight: 600;
@@ -46,26 +47,27 @@
 
 .categoryList a,
 .postList a {
-  color: var(--gray-700);
+  color: var(--text-color); /* theme-aware */
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: var(--spacing-sm) 0;
   transition: color var(--transition-fast), transform var(--transition-fast);
+  font-size: clamp(0.9rem, 2vw, 1rem);
 }
 
 .categoryList a:hover,
 .postList a:hover {
-  color: var(--primary);
+  color: var(--link-color); /* theme-aware */
   transform: translateX(4px);
 }
 
 .count {
-  background: var(--gray-100);
+  background: var(--card-bg); /* theme-aware */
   padding: 0.125rem var(--spacing-sm);
   border-radius: var(--radius-sm);
-  font-size: 0.875rem;
-  color: var(--gray-600);
+  font-size: clamp(0.8rem, 1.5vw, 0.875rem);
+  color: var(--text-color); /* theme-aware */
 }
 
 /* ✅ Newsletter widget */
@@ -82,6 +84,7 @@
 .newsletterWidget p {
   color: rgba(255, 255, 255, 0.9);
   margin-bottom: var(--spacing-lg);
+  font-size: clamp(0.95rem, 2vw, 1rem);
 }
 
 .form {
@@ -91,11 +94,12 @@
 }
 
 .form input {
-  padding: var(--spacing-sm) var(--spacing-md);
+  padding: 0.75rem 1rem;
   border: 1px solid rgba(255, 255, 255, 0.3);
   border-radius: var(--radius-md);
   background: rgba(255, 255, 255, 0.1);
   color: var(--white);
+  font-size: clamp(0.9rem, 2vw, 1rem);
   transition: background var(--transition-fast), border-color var(--transition-fast);
 }
 
@@ -110,19 +114,21 @@
 }
 
 .form button {
-  padding: var(--spacing-sm) var(--spacing-md);
-  background: var(--white);
+  padding: 0.75rem 1rem;
+  min-height: 44px;
+  background: var(--card-bg); /* theme-aware */
   color: var(--primary);
   border: none;
   border-radius: var(--radius-md);
   font-weight: 600;
+  font-size: clamp(0.9rem, 2vw, 1rem);
   cursor: pointer;
-  transition: all var(--transition-fast);
+  transition: background var(--transition-fast), transform var(--transition-fast), box-shadow var(--transition-fast);
 }
 
 .form button:hover {
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  box-shadow: var(--shadow-md);
 }
 
 /* ✅ Responsive adjustments */

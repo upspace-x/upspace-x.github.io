@@ -34,12 +34,18 @@
   --error: #ef4444;
   --info: #3b82f6;
 
-  /* 🔹 Typography */
+  /* 🔹 Typography Families */
   --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', sans-serif;
   --font-serif: 'Georgia', 'Times New Roman', serif;
   --font-mono: 'Monaco', 'Courier New', monospace;
 
-  /* 🔹 Font Sizes */
+  /* 🔹 Fluid Font Sizes */
+  --font-base: clamp(0.95rem, 2vw, 1.125rem);
+  --font-heading-lg: clamp(2rem, 5vw, 3.5rem);
+  --font-heading-md: clamp(1.75rem, 4vw, 2.5rem);
+  --font-heading-sm: clamp(1.25rem, 3vw, 1.75rem);
+
+  /* 🔹 Static Font Sizes (legacy support) */
   --text-xs: 0.75rem;
   --text-sm: 0.875rem;
   --text-md: 1rem;
@@ -49,7 +55,7 @@
   --text-3xl: 1.875rem;
   --text-4xl: 2.25rem;
 
-  /* 🔹 Spacing */
+  /* 🔹 Spacing Scale */
   --spacing-xs: 0.25rem;
   --spacing-sm: 0.5rem;
   --spacing-md: 1rem;
@@ -57,20 +63,23 @@
   --spacing-xl: 2rem;
   --spacing-2xl: 3rem;
   --spacing-3xl: 4rem;
+  --spacing-4xl: 6rem; /* ✅ for hero/section padding */
+  --spacing-5xl: 8rem; /* ✅ for immersive sections */
 
   /* 🔹 Border Radius */
   --radius-sm: 0.25rem;
   --radius-md: 0.5rem;
   --radius-lg: 0.75rem;
   --radius-xl: 1rem;
+  --radius-2xl: 1.5rem; /* ✅ softer modern cards */
   --radius-full: 9999px; /* ✅ for pills, avatars, buttons */
 
   /* 🔹 Shadows */
-  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
-  --shadow-inner: inset 0 2px 4px 0 rgba(0, 0, 0, 0.05);
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.12);
+  --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.15);
+  --shadow-inner: inset 0 2px 4px rgba(0, 0, 0, 0.05);
 
   /* 🔹 Transitions */
   --transition-fast: 150ms ease-in-out;
@@ -81,7 +90,8 @@
   --animation-speed: 0.5s;
 
   /* 🔹 Container */
-  --container-max: 1200px; /* ✅ locked at 1200px */
+  --container-max: 1200px;
+  --container-padding: 2rem;
 
   /* 🔹 Z-index scale */
   --z-header: 1000;

@@ -3,24 +3,27 @@
    ============================================ */
 
 .header {
-  background: var(--white);
+  background: var(--card-bg); /* theme-aware */
+  color: var(--text-color);
   box-shadow: var(--shadow-sm);
   position: sticky;
   top: 0;
-  z-index: 1000;
-  border-bottom: 1px solid var(--gray-200);
+  z-index: var(--z-header);
+  border-bottom: 1px solid var(--border-color);
 }
 
 .container {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: var(--spacing-md) var(--spacing-lg);
-  gap: var(--spacing-xl);
+  padding: clamp(0.75rem, 2vw, 1.25rem) clamp(1rem, 4vw, 2rem);
+  gap: clamp(1rem, 3vw, 2rem);
+  max-width: var(--container-max);
+  margin: 0 auto;
 }
 
 .logo {
-  font-size: 1.75rem;
+  font-size: clamp(1.5rem, 4vw, 2rem);
   font-weight: 800;
   color: var(--primary);
   letter-spacing: -0.5px;
@@ -36,20 +39,21 @@
 /* ✅ Navigation */
 .nav {
   display: flex;
-  gap: var(--spacing-lg);
+  gap: clamp(1rem, 3vw, 1.5rem);
   align-items: center;
 }
 
 .nav a {
-  color: var(--gray-700);
+  color: var(--text-color); /* theme-aware */
   font-weight: 500;
   padding: var(--spacing-sm) 0;
   position: relative;
   transition: color var(--transition-fast);
+  font-size: clamp(0.95rem, 2vw, 1rem);
 }
 
 .nav a:hover {
-  color: var(--primary);
+  color: var(--link-color); /* theme-aware */
 }
 
 .nav a::after {
@@ -78,27 +82,28 @@
   border: none;
   cursor: pointer;
   font-weight: 600;
-  color: var(--gray-700);
+  color: var(--text-color); /* theme-aware */
   padding: var(--spacing-sm) var(--spacing-md);
   transition: color var(--transition-fast);
   display: flex;
   align-items: center;
   gap: var(--spacing-xs);
+  font-size: clamp(0.95rem, 2vw, 1rem);
 }
 
 .navButton::after {
-  content: "▼"; /* Arrow indicator */
+  content: "▼";
   font-size: 0.75rem;
-  color: var(--gray-600);
+  color: var(--text-color); /* theme-aware */
   transition: transform var(--transition-fast);
 }
 
 .dropdown:hover .navButton::after {
-  transform: rotate(180deg); /* Flip arrow when open (desktop hover) */
+  transform: rotate(180deg);
 }
 
 .navButton:hover {
-  color: var(--primary);
+  color: var(--link-color);
 }
 
 /* ✅ Animated dropdown menu */
@@ -115,7 +120,6 @@
   min-width: 200px;
   z-index: var(--z-header);
 
-  /* Animation */
   opacity: 0;
   transform: translateY(-10px);
   pointer-events: none;
@@ -123,7 +127,7 @@
 }
 
 .dropdown:hover .dropdownMenu,
-.dropdownMenu.open { /* open class for mobile click */
+.dropdownMenu.open {
   opacity: 1;
   transform: translateY(0);
   pointer-events: auto;
@@ -133,11 +137,12 @@
   padding: var(--spacing-sm) var(--spacing-md);
   text-decoration: none;
   color: var(--text-color);
-  transition: background var(--transition-fast);
+  transition: background var(--transition-fast), color var(--transition-fast);
+  font-size: clamp(0.9rem, 2vw, 1rem);
 }
 
 .dropdownMenu a:hover {
-  background: var(--primary-light);
+  background: var(--primary);
   color: var(--white);
 }
 
@@ -153,7 +158,7 @@
   background: none;
   border: none;
   font-size: 1.5rem;
-  color: var(--gray-700);
+  color: var(--text-color); /* theme-aware */
   cursor: pointer;
   padding: var(--spacing-sm);
   display: flex;
@@ -163,12 +168,35 @@
 
 .searchBtn:hover,
 .menuToggle:hover {
-  color: var(--primary);
+  color: var(--link-color);
   transform: scale(1.1);
 }
 
 .menuToggle {
   display: none;
+}
+
+/* ✅ Theme Toggle */
+.themeToggle {
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  color: var(--text-color);
+  cursor: pointer;
+  font-size: 1.25rem;
+  padding: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background var(--transition-fast), 
+              color var(--transition-fast), 
+              transform var(--transition-fast);
+}
+
+.themeToggle:hover {
+  background: var(--primary);
+  color: var(--white);
+  transform: scale(1.1);
 }
 
 /* ✅ Mobile Responsive */
@@ -178,7 +206,7 @@
     top: 70px;
     left: 0;
     right: 0;
-    background: var(--white);
+    background: var(--card-bg); /* theme-aware */
     flex-direction: column;
     padding: var(--spacing-xl);
     box-shadow: var(--shadow-lg);
@@ -201,15 +229,12 @@
     padding: var(--spacing-sm) 0;
   }
 
-  /* ✅ Mobile dropdown menu */
   .dropdownMenu {
     position: static;
     border: none;
     box-shadow: none;
     background: transparent;
     min-width: unset;
-
-    /* Reset animation for mobile */
     opacity: 1;
     transform: none;
     pointer-events: auto;
@@ -220,6 +245,6 @@
   }
 
   .navButton::after {
-    transform: none; /* Arrow stays static on mobile */
+    transform: none;
   }
 }

@@ -11,18 +11,20 @@
 
 .search input {
   width: 100%;
-  padding: var(--spacing-md) var(--spacing-xl);
-  border: 2px solid var(--gray-200);
+  padding: clamp(0.75rem, 2vw, 1rem) clamp(1rem, 3vw, 1.5rem);
+  border: 2px solid var(--border-color); /* theme-aware */
   border-radius: var(--radius-lg);
-  font-size: 1rem;
+  font-size: clamp(0.95rem, 2vw, 1rem);
   font-family: inherit;
   transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+  background: var(--card-bg); /* theme-aware */
+  color: var(--text-color); /* theme-aware */
 }
 
 .search input:focus {
   outline: none;
   border-color: var(--primary);
-  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2); /* ✅ subtle focus ring */
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
 }
 
 .search button {
@@ -32,25 +34,26 @@
   transform: translateY(-50%);
   background: none;
   border: none;
-  color: var(--gray-600);
+  color: var(--text-color); /* theme-aware */
   cursor: pointer;
   font-size: 1.25rem;
-  transition: color var(--transition-fast);
+  transition: color var(--transition-fast), transform var(--transition-fast);
 }
 
 .search button:hover {
-  color: var(--primary);
+  color: var(--link-color); /* theme-aware */
+  transform: scale(1.1);
 }
 
 /* 🔹 Modal Overlay */
 .overlay {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.6);
+  background: var(--overlay-bg); /* theme-aware */
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 2000;
+  z-index: var(--z-overlay);
   animation: fadeIn var(--transition-base) ease-in-out;
 }
 
@@ -60,14 +63,15 @@
 }
 
 .modal {
-  background: var(--white);
+  background: var(--card-bg); /* theme-aware */
   border-radius: var(--radius-lg);
   width: 100%;
   max-width: 600px;
-  padding: var(--spacing-2xl);
+  padding: clamp(1.5rem, 4vw, 2rem);
   position: relative;
   box-shadow: var(--shadow-xl);
   animation: slideUp var(--transition-base) ease-in-out;
+  color: var(--text-color); /* theme-aware */
 }
 
 @keyframes slideUp {
@@ -82,14 +86,14 @@
   background: none;
   border: none;
   font-size: 1.5rem;
-  color: var(--gray-600);
+  color: var(--text-color); /* theme-aware */
   cursor: pointer;
   transition: color var(--transition-fast), transform var(--transition-fast);
 }
 
 .close:hover {
-  color: var(--primary);
-  transform: rotate(90deg); /* ✅ playful hover animation */
+  color: var(--link-color);
+  transform: rotate(90deg);
 }
 
 /* 🔹 Form inside Modal */
@@ -102,16 +106,19 @@
 
 .icon {
   font-size: 1.25rem;
-  color: var(--gray-500);
+  color: var(--text-color); /* theme-aware */
+  opacity: 0.7;
 }
 
 .input {
   flex: 1;
-  padding: var(--spacing-md) var(--spacing-lg);
-  border: 2px solid var(--gray-200);
+  padding: clamp(0.75rem, 2vw, 1rem) clamp(1rem, 3vw, 1.25rem);
+  border: 2px solid var(--border-color); /* theme-aware */
   border-radius: var(--radius-md);
-  font-size: 1rem;
+  font-size: clamp(0.95rem, 2vw, 1rem);
   transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+  background: var(--card-bg); /* theme-aware */
+  color: var(--text-color); /* theme-aware */
 }
 
 .input:focus {
@@ -124,8 +131,9 @@
 .loading {
   padding: var(--spacing-xl);
   text-align: center;
-  color: var(--gray-600);
+  color: var(--text-color); /* theme-aware */
   font-style: italic;
+  font-size: clamp(0.9rem, 1.5vw, 1rem);
 }
 
 /* 🔹 Results */
@@ -137,14 +145,14 @@
 
 .result {
   padding: var(--spacing-lg);
-  border-bottom: 1px solid var(--gray-200);
+  border-bottom: 1px solid var(--border-color); /* theme-aware */
   cursor: pointer;
   transition: background var(--transition-fast), transform var(--transition-fast);
 }
 
 .result:hover {
-  background: var(--gray-50);
-  transform: translateX(4px); /* ✅ subtle hover shift */
+  background: var(--background); /* theme-aware */
+  transform: translateX(4px);
 }
 
 .result:last-child {
@@ -152,14 +160,15 @@
 }
 
 .result h3 {
-  font-size: 1.125rem;
+  font-size: clamp(1rem, 2.5vw, 1.125rem);
   margin-bottom: var(--spacing-sm);
-  color: var(--gray-900);
+  color: var(--text-color); /* theme-aware */
 }
 
 .result p {
-  color: var(--gray-600);
-  font-size: 0.875rem;
+  color: var(--text-color); /* theme-aware */
+  opacity: 0.8;
+  font-size: clamp(0.85rem, 1.5vw, 0.9rem);
   margin-bottom: var(--spacing-sm);
   display: -webkit-box;
   -webkit-line-clamp: 2;
@@ -173,7 +182,7 @@
   color: var(--white);
   padding: 0.125rem var(--spacing-sm);
   border-radius: var(--radius-sm);
-  font-size: 0.75rem;
+  font-size: clamp(0.7rem, 1.5vw, 0.75rem);
   font-weight: 600;
   text-transform: uppercase;
 }
@@ -182,6 +191,7 @@
 .noResults {
   padding: var(--spacing-2xl);
   text-align: center;
-  color: var(--gray-600);
+  color: var(--text-color); /* theme-aware */
   font-style: italic;
+  font-size: clamp(0.9rem, 1.5vw, 1rem);
 }

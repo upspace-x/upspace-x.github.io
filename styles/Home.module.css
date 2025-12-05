@@ -17,7 +17,6 @@
 .hero {
   position: relative;
   width: 100%;
-  min-height: 80vh; /* taller for immersive feel */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -31,7 +30,9 @@
 
   color: var(--white);
   margin-bottom: var(--spacing-3xl);
-  padding: var(--spacing-5xl) var(--spacing-xl);
+
+  /* Control height with padding instead of vh */
+  padding: var(--spacing-6xl) var(--spacing-xl);
 }
 .heroTitle {
   font-size: 4rem;

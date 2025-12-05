@@ -13,23 +13,23 @@
 }
 
 .main {
-  max-width: 1200px;
+  max-width: var(--container-max); /* standardized container width */
   margin: 0 auto;
-  padding: var(--spacing-xl) var(--spacing-lg);
+  padding: clamp(2rem, 4vw, 3rem) var(--container-padding); /* fluid spacing */
   flex: 1;
 }
 
 .contentWrapper {
   display: grid;
   grid-template-columns: 1fr;
-  gap: var(--spacing-2xl);
+  gap: clamp(1.5rem, 3vw, 2.5rem); /* responsive gap */
 }
 
 .content {
   background: var(--card-bg);
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-sm);
-  padding: var(--spacing-xl);
+  padding: clamp(1.5rem, 3vw, 2rem); /* fluid padding */
   transition: background var(--transition-slow), color var(--transition-slow);
 }
 
@@ -64,7 +64,7 @@
 .contentWithSidebar {
   display: grid;
   grid-template-columns: 3fr 1fr;
-  gap: var(--spacing-2xl);
+  gap: clamp(1.5rem, 3vw, 2.5rem);
   align-items: start;
 }
 

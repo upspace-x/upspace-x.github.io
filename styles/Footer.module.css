@@ -3,29 +3,30 @@
    ============================================ */
 
 .footer {
-  background: var(--gray-900);
-  color: var(--white);
-  padding: var(--spacing-3xl) 0 var(--spacing-xl);
+  background: var(--background); /* theme-aware */
+  color: var(--text-color);
+  padding: clamp(3rem, 6vw, 6rem) 0 clamp(2rem, 4vw, 3rem);
 }
 
 .container {
-  max-width: 1200px;
+  max-width: var(--container-max);
   margin: 0 auto;
-  padding: 0 var(--spacing-lg);
+  padding: 0 var(--container-padding);
 }
 
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: var(--spacing-2xl);
-  margin-bottom: var(--spacing-2xl);
+  gap: clamp(1.5rem, 4vw, 2.5rem);
+  margin-bottom: clamp(2rem, 4vw, 3rem);
 }
 
 /* ✅ About / Logo */
 .about p {
   margin: var(--spacing-md) 0;
-  color: var(--gray-300);
-  line-height: 1.6;
+  color: var(--text-color); /* theme-aware */
+  line-height: 1.7;
+  font-size: clamp(0.95rem, 2vw, 1rem);
 }
 
 .social {
@@ -38,44 +39,47 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 36px;
-  height: 36px;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
-  background: var(--gray-800);
-  color: var(--white);
+  background: var(--card-bg); /* theme-aware */
+  color: var(--text-color);
   transition: background var(--transition-fast), transform var(--transition-fast);
+  font-size: 1.125rem;
 }
 
 .social a:hover {
   background: var(--primary);
+  color: var(--white);
   transform: translateY(-2px);
 }
 
 /* ✅ Links */
 .links h4 {
-  font-size: 1.125rem;
+  font-size: clamp(1rem, 2.5vw, 1.25rem);
   margin-bottom: var(--spacing-md);
-  color: var(--white);
+  color: var(--text-color); /* theme-aware */
 }
 
 .links a {
   display: block;
   margin-bottom: var(--spacing-sm);
-  color: var(--gray-300);
+  color: var(--text-color); /* theme-aware */
   transition: color var(--transition-fast);
+  font-size: clamp(0.95rem, 2vw, 1rem);
 }
 
 .links a:hover {
-  color: var(--primary);
+  color: var(--link-color); /* theme-aware */
 }
 
 /* ✅ Bottom bar */
 .bottom {
-  border-top: 1px solid var(--gray-700);
+  border-top: 1px solid var(--border-color);
   padding-top: var(--spacing-lg);
   text-align: center;
-  color: var(--gray-400);
-  font-size: 0.875rem;
+  color: var(--text-color); /* theme-aware */
+  font-size: clamp(0.8rem, 1.5vw, 0.875rem);
 }
 
 /* ✅ Responsive adjustments */
@@ -87,9 +91,5 @@
   
   .social {
     justify-content: center;
-  }
-  
-  .bottom {
-    font-size: 0.75rem;
   }
 }

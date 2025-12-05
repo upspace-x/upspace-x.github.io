@@ -11,6 +11,7 @@ const Header = () => {
   const [searchOpen, setSearchOpen] = useState(false);
   const [categoriesOpen, setCategoriesOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  const [theme, setTheme] = useState('light');
   
   // ✅ Detect screen size
   useEffect(() => {
@@ -19,6 +20,20 @@ const Header = () => {
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
+  
+  // ✅ Theme persistence
+  useEffect(() => {
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    setTheme(savedTheme);
+    document.documentElement.setAttribute('data-theme', savedTheme);
+  }, []);
+  
+  const toggleTheme = () => {
+    const nextTheme = theme === 'dark' ? 'light' : 'dark';
+    setTheme(nextTheme);
+    document.documentElement.setAttribute('data-theme', nextTheme);
+    localStorage.setItem('theme', nextTheme);
+  };
   
   return (
     <>
@@ -88,6 +103,15 @@ const Header = () => {
               aria-label="Toggle menu"
             >
               {menuOpen ? <FiX /> : <FiMenu />}
+            </button>
+
+            {/* ✅ Theme Toggle */}
+            <button
+              className={styles.themeToggle}
+              onClick={toggleTheme}
+              aria-label="Toggle theme"
+            >
+              {theme === 'dark' ? '🌞' : '🌙'}
             </button>
           </div>
         </div>
