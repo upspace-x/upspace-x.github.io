@@ -7,12 +7,12 @@ export default function Home({ featuredPosts }) {
   return (
     <Layout>
       {/* Hero Section */}
-      <section className={styles.hero}>
+      <section className={`${styles.section} ${styles.hero}`}>
         <div className="container">
-          <h1 className={styles.title}>
+          <h1 className={styles.heroTitle}>
             Welcome to <span className={styles.brand}>UpSpaceX</span>
           </h1>
-          <p className={styles.subtitle}>
+          <p className={styles.heroSubtitle}>
             Curated insights in technology, business, and innovation — daily.
           </p>
           <div className={styles.cta}>
@@ -22,7 +22,7 @@ export default function Home({ featuredPosts }) {
       </section>
 
       {/* Featured Posts */}
-      <section className={styles.featured}>
+      <section className={`${styles.section} ${styles.featured}`}>
         <div className="container">
           <h2 className={styles.sectionTitle}>Featured Posts</h2>
           <div className={styles.grid}>
@@ -34,7 +34,7 @@ export default function Home({ featuredPosts }) {
       </section>
 
       {/* Categories Preview */}
-      <section className={styles.categories}>
+      <section className={`${styles.section} ${styles.categories}`}>
         <div className="container">
           <h2 className={styles.sectionTitle}>Explore Topics</h2>
           <div className={styles.categoryGrid}>
@@ -47,7 +47,7 @@ export default function Home({ featuredPosts }) {
       </section>
 
       {/* Newsletter Section */}
-      <section className={styles.newsletter}>
+      <section className={`${styles.section} ${styles.newsletter}`}>
         <div className="container">
           <h2 className={styles.sectionTitle}>Stay Ahead</h2>
           <p className={styles.subtitle}>Subscribe for weekly insights and updates.</p>
