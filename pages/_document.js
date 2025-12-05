@@ -4,7 +4,13 @@ export default function Document() {
   return (
     <Html lang="en">
       <Head>
-        <link rel="icon" href="/favicon.ico" />
+        {/* ✅ Use your high-resolution favicon.jpeg from /public */}
+        <link rel="icon" href="/favicon.jpeg" type="image/jpeg" />
+
+        {/* ✅ Apple touch icon for iOS home screens */}
+        <link rel="apple-touch-icon" href="/favicon.jpeg" />
+
+        {/* ✅ Theme color for mobile browsers */}
         <meta name="theme-color" content="#2563eb" />
       </Head>
       <body>
