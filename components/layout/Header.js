@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';   // ✅ Import Next.js Image component
 import { useState } from 'react';
 import { FiMenu, FiX, FiSearch } from 'react-icons/fi';
 import Search from '../common/Search';
@@ -12,8 +13,15 @@ const Header = () => {
     <>
       <header className={styles.header}>
         <div className={`container ${styles.container}`}>
+          {/* ✅ Replace text logo with image */}
           <Link href="/" className={styles.logo}>
-            <span className={styles.logoText}>UpSpaceX</span>
+            <Image 
+              src="/logo.jpeg" 
+              alt="UpSpaceX Logo" 
+              width={150} 
+              height={40} 
+              priority   // ensures logo loads fast
+            />
           </Link>
 
           <nav className={`${styles.nav} ${menuOpen ? styles.navOpen : ''}`}>
