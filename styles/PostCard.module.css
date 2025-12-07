@@ -51,6 +51,15 @@
   text-transform: uppercase;
   letter-spacing: 0.5px;
   box-shadow: var(--shadow-sm);
+  display: inline-flex; /* ✅ allow icon + text alignment */
+  align-items: center;
+}
+
+/* ✅ Badge icon styling */
+.badgeIcon {
+  margin-right: var(--spacing-xs);
+  font-size: 1rem;
+  line-height: 1;
 }
 
 /* ✅ Category-specific color themes */
@@ -63,6 +72,7 @@
 .lifestyle { background: #f59e0b; }
 .health { background: #22c55e; }
 .opinion { background: #6b7280; }
+.entertainment { background: #e11d48; } /* ✅ NEW Entertainment category badge */
 
 .content {
   padding: clamp(1rem, 3vw, 1.5rem);

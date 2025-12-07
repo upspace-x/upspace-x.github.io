@@ -3,13 +3,30 @@ import Image from 'next/image';
 import { format } from 'date-fns';
 import styles from '../../styles/PostCard.module.css';
 
+// ✅ Category → Icon mapping
+const categoryIcons = {
+  technology: '💻',
+  business: '💼',
+  newsinsights: '📰',
+  education: '📚',
+  careersjobs: '📈',
+  sports: '⚽',
+  lifestyle: '🌿',
+  health: '❤️',
+  opinion: '✍️',
+  entertainment: '🎬',
+};
+
 const PostCard = ({ post }) => {
+  const categoryKey = post.category ? post.category.toLowerCase() : null;
+  const icon = categoryKey && categoryIcons[categoryKey];
+
   return (
     <article className={styles.card}>
       {/* ✅ Cover image + category badge */}
       <Link href={`/blog/${post.slug}`} className={styles.imageWrapper}>
         <Image
-          src={post.coverImage || '/images/placeholder.jpg'}
+          src={post.coverImage || '/images/posts/placeholder.jpg'} // ✅ consistent path
           alt={post.title}
           width={600}
           height={400}
@@ -17,7 +34,8 @@ const PostCard = ({ post }) => {
           priority={false}
         />
         {post.category && (
-          <span className={`${styles.badge} ${post.category.toLowerCase()}`}>
+          <span className={`${styles.badge} ${categoryKey}`}>
+            {icon && <span className={styles.badgeIcon}>{icon}</span>}
             {post.category}
           </span>
         )}

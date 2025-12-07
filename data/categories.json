@@ -43,5 +43,10 @@
     "name": "Opinion & Editorials",
     "slug": "opinion",
     "description": "Editorial perspectives, thought leadership, and opinion pieces"
+  },
+  {
+    "name": "Entertainment",
+    "slug": "entertainment",
+    "description": "Celebrity news, viral trends, movies, music, and pop culture highlights"
   }
 ]

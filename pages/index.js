@@ -27,7 +27,7 @@ export default function Home({ featuredPosts }) {
           <h2 className={styles.sectionTitle}>Featured Posts</h2>
           <div className={styles.grid}>
             {featuredPosts.map((post) => (
-              <PostCard key={post.id} post={post} />
+              <PostCard key={post.slug} post={post} />
             ))}
           </div>
         </div>
@@ -40,8 +40,8 @@ export default function Home({ featuredPosts }) {
           <div className={styles.categoryGrid}>
             <a href="/blog/category/technology" className={styles.categoryCard}>Technology</a>
             <a href="/blog/category/business" className={styles.categoryCard}>Business</a>
-            <a href="/blog/category/innovation" className={styles.categoryCard}>Innovation</a>
-            <a href="/blog/category/startups" className={styles.categoryCard}>Startups</a>
+            <a href="/blog/category/entertainment" className={styles.categoryCard}>Entertainment</a>
+            <a href="/blog/category/lifestyle" className={styles.categoryCard}>Lifestyle</a>
           </div>
         </div>
       </section>
@@ -63,7 +63,7 @@ export default function Home({ featuredPosts }) {
 
 // ✅ Fetch posts dynamically at build time
 export async function getStaticProps() {
-  const featuredPosts = await getFeaturedPosts(3);
+  const featuredPosts = getFeaturedPosts().slice(0, 4); // ✅ limit to 4 posts
   
   return {
     props: {

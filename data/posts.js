@@ -1,22 +1,75 @@
-// Local mock data (useful for dev or fallback)
-export const localPosts = [
-  // ... your existing post objects (unchanged)
-];
+import fs from 'fs';
+import path from 'path';
+import matter from 'gray-matter';
 
-export const posts = localPosts;
+const postsDirectory = path.join(process.cwd(), 'posts');
+
+// ✅ Helper: calculate read time (~200 words/minute)
+function calculateReadTime(text) {
+  const words = text.split(/\s+/).length;
+  return Math.ceil(words / 200);
+}
 
 // ✅ Get all posts
 export function getAllPosts() {
-  return [...localPosts].sort((a, b) => new Date(b.date) - new Date(a.date));
+  const fileNames = fs.readdirSync(postsDirectory);
+  
+  const posts = fileNames.map((fileName) => {
+    const slug = fileName.replace(/\.md$/, '');
+    const fullPath = path.join(postsDirectory, fileName);
+    const fileContents = fs.readFileSync(fullPath, 'utf8');
+    const { data, content } = matter(fileContents);
+    
+    return {
+      slug,
+      title: data.title,
+      date: data.date,
+      excerpt: data.excerpt,
+      author: data.author,
+      category: data.category,
+      tags: data.tags || [],
+      coverImage: data.image, // ✅ always /images/posts/...jpg
+      featured: data.featured || false,
+      content,
+      readTime: calculateReadTime(content),
+    };
+  });
+  
+  // Sort newest first
+  return posts.sort((a, b) => new Date(b.date) - new Date(a.date));
 }
 
 // ✅ Get post by slug
 export function getPostBySlug(slug) {
-  return localPosts.find((post) => post.slug === slug) || null;
+  const fullPath = path.join(postsDirectory, `${slug}.md`);
+  const fileContents = fs.readFileSync(fullPath, 'utf8');
+  const { data, content } = matter(fileContents);
+  
+  return {
+    slug,
+    title: data.title,
+    date: data.date,
+    excerpt: data.excerpt,
+    author: data.author,
+    category: data.category,
+    tags: data.tags || [],
+    coverImage: data.image, // ✅ consistent image path
+    featured: data.featured || false,
+    content,
+    readTime: calculateReadTime(content),
+  };
 }
 
-// ✅ Get featured posts (e.g., by tag or author)
+// ✅ Get posts by category
+export function getPostsByCategory(categorySlug) {
+  const posts = getAllPosts();
+  return posts.filter(
+    (post) => post.category.toLowerCase() === categorySlug.toLowerCase()
+  );
+}
+
+// ✅ Get featured posts
 export function getFeaturedPosts() {
-  // You can customize this logic — here we feature posts by Maruf Quadri
-  return localPosts.filter((post) => post.author === 'Maruf Quadri');
+  const posts = getAllPosts();
+  return posts.filter((post) => post.featured);
 }

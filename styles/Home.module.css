@@ -4,13 +4,13 @@
 
 /* ✅ Shared Section Utility */
 .section {
-  padding: var(--spacing-4xl) 0; /* more vertical space for immersive feel */
+  padding: var(--spacing-4xl) 0;
   width: 100%;
 }
 .section .container {
-  max-width: 100%; /* allow full width */
+  max-width: 100%;
   margin: 0 auto;
-  padding: 0 var(--spacing-xl); /* keep breathing room on sides */
+  padding: 0 var(--spacing-xl);
 }
 
 /* ✅ Hero Section */
@@ -23,15 +23,12 @@
   justify-content: center;
   text-align: center;
 
-  /* Background image with gradient overlay */
   background: 
     linear-gradient(135deg, rgba(0,0,0,0.6), rgba(0,0,0,0.4)), 
     url('/images/hero-bg.jpg') center/cover no-repeat;
 
   color: var(--white);
   margin-bottom: var(--spacing-3xl);
-
-  /* Control height with padding instead of vh */
   padding: var(--spacing-6xl) var(--spacing-xl);
 }
 .heroTitle {
@@ -85,8 +82,10 @@
 }
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  grid-template-columns: repeat(2, 1fr); /* ✅ 2 columns for desktop */
   gap: var(--spacing-xl);
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 /* ✅ Categories Section */
@@ -102,25 +101,49 @@
 }
 .categoryGrid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  grid-template-columns: repeat(2, 1fr); /* ✅ 2 columns for desktop */
   gap: var(--spacing-lg);
-  margin-top: var(--spacing-lg);
+  max-width: 800px;
+  margin: 0 auto;
 }
 .categoryCard {
-  background: var(--white);
-  border: 1px solid var(--gray-300);
   border-radius: 8px;
-  padding: var(--spacing-lg);
+  padding: var(--spacing-xl);
   text-align: center;
   font-weight: 600;
-  color: var(--primary-dark);
+  color: var(--white);
   text-decoration: none;
   transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
+
+/* ✅ Category-specific colors */
+.categoryCard.technology {
+  background: #2563eb; /* blue */
+}
+.categoryCard.business {
+  background: #16a34a; /* green */
+}
+.categoryCard.entertainment {
+  background: #e11d48; /* red-pink */
+}
+.categoryCard.lifestyle {
+  background: #f59e0b; /* amber */
+}
+
+/* ✅ Hover effect */
 .categoryCard:hover {
-  background: var(--primary);
-  color: var(--white);
   transform: scale(1.05);
+  filter: brightness(1.1);
+}
+
+/* ✅ Optional icon styling */
+.categoryIcon {
+  font-size: 2rem;
+  margin-bottom: var(--spacing-md);
 }
 
 /* ✅ Newsletter Section */
@@ -166,6 +189,11 @@
 }
 
 /* ✅ Responsive */
+@media (max-width: 1024px) {
+  .grid {
+    grid-template-columns: 1fr; /* ✅ stack featured posts on tablets/mobile */
+  }
+}
 @media (max-width: 768px) {
   .heroTitle {
     font-size: 2.5rem;
@@ -178,8 +206,8 @@
     width: 100%;
     font-size: 1rem;
   }
-  .grid {
-    grid-template-columns: 1fr;
+  .categoryGrid {
+    grid-template-columns: 1fr; /* ✅ stack categories on mobile */
   }
   .form {
     flex-direction: column;
