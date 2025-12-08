@@ -51,3 +51,4 @@ const Sidebar = ({ posts = [], categories = [] }) => {
   );
 };
 
+export default Sidebar;
