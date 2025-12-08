@@ -2,21 +2,17 @@ import Link from 'next/link';
 import styles from '../../styles/Sidebar.module.css';
 
 const Sidebar = ({ posts = [], categories = [] }) => {
-  // ✅ Dynamically get the latest 5 posts
   const recentPosts = posts.slice(0, 5);
   
   return (
     <aside className={styles.sidebar}>
-      {/* ✅ Categories Widget */}
+      {/* Categories Widget */}
       <div className={styles.widget}>
         <h3 className={styles.widgetTitle}>Categories</h3>
         <ul className={styles.categoryList}>
           {categories.map(category => (
             <li key={category.slug}>
-              <Link
-                href={`/blog/category/${category.slug}`}
-                className={styles.link}
-              >
+              <Link href={`/blog/category/${category.slug}`} className={styles.link}>
                 {category.name}
                 {category.count !== undefined && (
                   <span className={styles.count}>({category.count})</span>
@@ -27,7 +23,7 @@ const Sidebar = ({ posts = [], categories = [] }) => {
         </ul>
       </div>
 
-      {/* ✅ Recent Posts Widget */}
+      {/* Recent Posts Widget */}
       <div className={styles.widget}>
         <h3 className={styles.widgetTitle}>Recent Posts</h3>
         <ul className={styles.postList}>
@@ -41,17 +37,12 @@ const Sidebar = ({ posts = [], categories = [] }) => {
         </ul>
       </div>
 
-      {/* ✅ Newsletter Widget */}
+      {/* Newsletter Widget */}
       <div className={`${styles.widget} ${styles.newsletterWidget}`}>
         <h3 className={styles.widgetTitle}>Newsletter</h3>
         <p>Get weekly updates delivered to your inbox.</p>
         <form className={styles.form}>
-          <input
-            type="email"
-            placeholder="Your email"
-            aria-label="Email address"
-            required
-          />
+          <input type="email" placeholder="Your email" aria-label="Email address" required />
           <button type="submit">Subscribe</button>
         </form>
       </div>

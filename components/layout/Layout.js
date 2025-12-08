@@ -27,7 +27,7 @@ export default function Layout({ children, showSidebar = false, posts = [], cate
   }, [theme]);
   
   const toggleTheme = () => {
-    setTheme((prev) => (prev === 'light' ? 'dark' : 'light'));
+    setTheme(prev => (prev === 'light' ? 'dark' : 'light'));
   };
   
   return (
@@ -47,7 +47,7 @@ export default function Layout({ children, showSidebar = false, posts = [], cate
 
             {showSidebar && (
               <aside className={styles.sidebar}>
-                <Sidebar posts={posts} categories={categories} /> {/* ✅ pass both props */}
+                <Sidebar posts={posts} categories={categories} />
               </aside>
             )}
           </div>
