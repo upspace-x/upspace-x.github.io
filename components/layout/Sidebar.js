@@ -1,14 +1,10 @@
 import Link from 'next/link';
-import { getCategories } from '../../lib/categories';
-import { getAllPosts } from '../../data/posts'; // ✅ FIXED import
 import styles from '../../styles/Sidebar.module.css';
 
-const Sidebar = () => {
-  const categories = getCategories();
-
+const Sidebar = ({ posts = [], categories = [] }) => {
   // ✅ Dynamically get the latest 5 posts
-  const recentPosts = getAllPosts().slice(0, 5);
-
+  const recentPosts = posts.slice(0, 5);
+  
   return (
     <aside className={styles.sidebar}>
       {/* ✅ Categories Widget */}

@@ -1,4 +1,4 @@
-import { getAllPosts } from '../../data/posts'; // ✅ FIXED import
+import { getAllPosts } from '../../data/posts';
 
 export default function handler(req, res) {
   if (req.method !== 'GET') {
@@ -11,16 +11,15 @@ export default function handler(req, res) {
     return res.status(400).json({ error: 'Query parameter required' });
   }
   
-  const query = q.toLowerCase();
+  const query = q.trim().toLowerCase();
   
-  // ✅ Get all posts dynamically
   const allPosts = getAllPosts();
   
   const results = allPosts.filter(post =>
-    post.title.toLowerCase().includes(query) ||
-    post.excerpt.toLowerCase().includes(query) ||
-    post.content.toLowerCase().includes(query) ||
-    post.tags.some(tag => tag.toLowerCase().includes(query))
+    (post.title && post.title.toLowerCase().includes(query)) ||
+    (post.excerpt && post.excerpt.toLowerCase().includes(query)) ||
+    (post.content && post.content.toLowerCase().includes(query)) ||
+    (post.tags && post.tags.some(tag => tag.toLowerCase().includes(query)))
   );
   
   return res.status(200).json({ results, count: results.length });

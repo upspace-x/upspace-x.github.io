@@ -4,10 +4,9 @@ import Footer from './Footer';
 import Sidebar from './Sidebar';
 import styles from '../../styles/Layout.module.css';
 
-export default function Layout({ children, showSidebar = false }) {
+export default function Layout({ children, showSidebar = false, posts = [], categories = [] }) {
   const [theme, setTheme] = useState('light');
   
-  // ✅ Load saved theme or system preference on mount
   useEffect(() => {
     const savedTheme = localStorage.getItem('theme');
     if (savedTheme) {
@@ -22,7 +21,6 @@ export default function Layout({ children, showSidebar = false }) {
     }
   }, []);
   
-  // ✅ Apply theme whenever it changes
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme);
     localStorage.setItem('theme', theme);
@@ -34,10 +32,8 @@ export default function Layout({ children, showSidebar = false }) {
   
   return (
     <div className={styles.layout}>
-      {/* ✅ Global Header */}
       <Header />
 
-      {/* ✅ Theme Toggle Button */}
       <div className={styles.themeToggle}>
         <button onClick={toggleTheme} aria-label="Toggle theme">
           {theme === 'light' ? '🌙' : '☀️'}
@@ -47,20 +43,17 @@ export default function Layout({ children, showSidebar = false }) {
       <main className={styles.main}>
         <div className="container">
           <div className={styles.contentWrapper}>
-            {/* ✅ Main content */}
             <div className={styles.content}>{children}</div>
 
-            {/* ✅ Optional Sidebar */}
             {showSidebar && (
               <aside className={styles.sidebar}>
-                <Sidebar />
+                <Sidebar posts={posts} categories={categories} /> {/* ✅ pass both props */}
               </aside>
             )}
           </div>
         </div>
       </main>
 
-      {/* ✅ Global Footer */}
       <Footer />
     </div>
   );

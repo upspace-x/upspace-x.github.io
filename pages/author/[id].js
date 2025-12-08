@@ -3,11 +3,12 @@ import SEO from '../../components/seo/SEO';
 import PostCard from '../../components/blog/PostCard';
 import { getAuthorById, getAuthors } from '../../lib/authors';
 import { getAllPosts } from '../../data/posts';
+import { getCategories } from '../../lib/categories'; // ✅ import categories
 import styles from '../../styles/Blog.module.css';
 
-export default function AuthorPage({ author, authorPosts }) {
+export default function AuthorPage({ author, authorPosts, allPosts, categories }) {
   return (
-    <Layout>
+    <Layout showSidebar={true} posts={allPosts} categories={categories}>
       <SEO 
         title={`${author.name} - UpSpaceX`}
         description={author.bio}
@@ -50,6 +51,7 @@ export async function getStaticProps({ params }) {
   const author = getAuthorById(params.id);
   
   const allPosts = getAllPosts();
+  const categories = getCategories(); // ✅ fetch categories server-side
   
   const authorPosts = allPosts.filter(
     post => post.author.toLowerCase().replace(/\s+/g, '-') === params.id
@@ -58,7 +60,9 @@ export async function getStaticProps({ params }) {
   return {
     props: {
       author,
-      authorPosts
+      authorPosts,
+      allPosts,
+      categories // ✅ pass categories for Sidebar
     }
   };
 }

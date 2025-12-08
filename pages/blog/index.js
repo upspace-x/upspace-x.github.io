@@ -4,24 +4,21 @@ import Layout from '../../components/layout/Layout';
 import SEO from '../../components/seo/SEO';
 import PostCard from '../../components/blog/PostCard';
 import Pagination from '../../components/common/Pagination';
-import { getAllPosts } from '../../data/posts'; // ✅ FIXED import
+import { getAllPosts } from '../../data/posts'; // ✅ server-side only
+import { getCategories } from '../../lib/categories'; // ✅ fetch categories server-side
 import styles from '../../styles/Blog.module.css';
 
 const POSTS_PER_PAGE = 9;
 
-export default function Blog() {
+export default function Blog({ allPosts, categories }) {
   const router = useRouter();
   const { search, page = '1' } = router.query;
   
   const [currentPage, setCurrentPage] = useState(parseInt(page));
   
-  // ✅ Ensure currentPage updates when query changes
   useEffect(() => {
     setCurrentPage(parseInt(page));
   }, [page]);
-  
-  // ✅ Get all posts dynamically
-  const allPosts = getAllPosts();
   
   // ✅ Filter posts by search query
   const filteredPosts = search ?
@@ -48,13 +45,12 @@ export default function Blog() {
   };
   
   return (
-    <Layout showSidebar={true}>
+    <Layout showSidebar={true} posts={allPosts} categories={categories}>
       <SEO
         title="Blog - UpSpaceX | Latest Insights"
         description="Explore articles on technology, business, education, careers, sports, lifestyle, health, and opinion."
       />
 
-      {/* ✅ Apply section utility */}
       <section className={`${styles.section} ${styles.blog}`}>
         <div className="container">
           <header className={styles.header}>
@@ -92,4 +88,14 @@ export default function Blog() {
       </section>
     </Layout>
   );
+}
+
+// ✅ Fetch posts & categories server-side only
+export async function getStaticProps() {
+  const allPosts = getAllPosts();
+  const categories = getCategories();
+  
+  return {
+    props: { allPosts, categories }
+  };
 }
