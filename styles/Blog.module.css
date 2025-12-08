@@ -16,6 +16,10 @@
   margin-bottom: var(--spacing-md);
   color: var(--gray-900);
   line-height: 1.2;
+  display: inline-flex; /* ✅ allow icon + text alignment */
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-sm);
 }
 
 .header p {
@@ -92,6 +96,13 @@
   font-size: clamp(0.95rem, 1.5vw, 1rem);
   max-width: 600px;
   margin: 0 auto;
+}
+
+/* ✅ Category Icon Styling */
+.categoryIcon {
+  font-size: 2rem;
+  line-height: 1;
+  margin-right: var(--spacing-xs);
 }
 
 /* ✅ Responsive refinements */

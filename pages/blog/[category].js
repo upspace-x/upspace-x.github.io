@@ -1,14 +1,27 @@
 import { useRouter } from 'next/router';
-import Layout from '../../../components/layout/Layout';
-import SEO from '../../../components/seo/SEO';
-import PostCard from '../../../components/blog/PostCard';
-import Pagination from '../../../components/common/Pagination';
-import { getPostsByCategory } from '../../../lib/posts';
-import { getCategories } from '../../../lib/categories';
+import Layout from '../../components/layout/Layout';
+import SEO from '../../components/seo/SEO';
+import PostCard from '../../components/blog/PostCard';
+import Pagination from '../../components/common/Pagination';
+import { getPostsByCategory, getCategories } from '../../data/posts';
 import { useState, useEffect } from 'react';
-import styles from '../../../styles/Blog.module.css';
+import styles from '../../styles/Blog.module.css';
 
 const POSTS_PER_PAGE = 9;
+
+// ✅ Category → Icon mapping
+const categoryIcons = {
+  technology: '💻',
+  business: '💼',
+  newsinsights: '📰',
+  education: '📚',
+  careersjobs: '📈',
+  sports: '⚽',
+  lifestyle: '🌿',
+  health: '❤️',
+  opinion: '✍️',
+  entertainment: '🎬',
+};
 
 export default function CategoryPage({ posts, category }) {
   const router = useRouter();
@@ -16,7 +29,6 @@ export default function CategoryPage({ posts, category }) {
   
   const [currentPage, setCurrentPage] = useState(parseInt(page));
   
-  // ✅ Sync currentPage with query param
   useEffect(() => {
     setCurrentPage(parseInt(page));
   }, [page]);
@@ -28,11 +40,14 @@ export default function CategoryPage({ posts, category }) {
   const handlePageChange = (newPage) => {
     setCurrentPage(newPage);
     router.push({
-      pathname: `/blog/category/${category.slug}`,
+      pathname: `/blog/${category.slug}`,
       query: { page: newPage }
     });
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
+  
+  const categoryKey = category.slug ? category.slug.toLowerCase() : null;
+  const icon = categoryKey && categoryIcons[categoryKey];
   
   return (
     <Layout showSidebar={true}>
@@ -44,7 +59,10 @@ export default function CategoryPage({ posts, category }) {
       <div className={styles.blog}>
         <div className="container">
           <header className={styles.header}>
-            <h1>{category.name}</h1>
+            <h1>
+              {icon && <span className={styles.categoryIcon}>{icon}</span>}
+              {category.name}
+            </h1>
             <p>{posts.length} articles</p>
           </header>
 
@@ -52,7 +70,14 @@ export default function CategoryPage({ posts, category }) {
             <>
               <div className={styles.grid}>
                 {currentPosts.map(post => (
-                  <PostCard key={post.slug} post={post} />
+                  <PostCard
+                    key={post.slug}
+                    post={{
+                      ...post,
+                      // ✅ Ensure PostCard links to /category/slug
+                      url: `/${post.category.toLowerCase()}/${post.slug}`
+                    }}
+                  />
                 ))}
               </div>
 

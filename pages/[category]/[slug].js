@@ -2,7 +2,7 @@ import { useRouter } from 'next/router';
 import { format } from 'date-fns';
 import Layout from '../../components/layout/Layout';
 import SEO from '../../components/seo/SEO';
-import { getAllPosts, getPostBySlug } from '../../data/posts';
+import { getAllPosts, getPostByCategoryAndSlug } from '../../data/posts';
 import styles from '../../styles/PostContent.module.css';
 import ReactMarkdown from 'react-markdown';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
@@ -15,7 +15,7 @@ export default function Post({ post }) {
   if (router.isFallback) {
     return (
       <Layout showSidebar={true}>
-        <section className={`${styles.section}`}>
+        <section className={styles.section}>
           <div className="container" style={{ textAlign: 'center' }}>
             <h1>Loading…</h1>
             <p>We’re preparing this article for you.</p>
@@ -29,7 +29,7 @@ export default function Post({ post }) {
   if (!post) {
     return (
       <Layout showSidebar={true}>
-        <section className={`${styles.section}`}>
+        <section className={styles.section}>
           <div className="container" style={{ textAlign: 'center' }}>
             <h1>Post not found</h1>
             <p>The article you're looking for doesn't exist.</p>
@@ -46,9 +46,9 @@ export default function Post({ post }) {
         description={post.excerpt}
         image={post.coverImage}
         article={true}
+        category={post.category}
       />
 
-      {/* ✅ Apply section utility */}
       <article className={`${styles.section} ${styles.article}`}>
         <div className="container">
           <header className={styles.header}>
@@ -126,20 +126,25 @@ export default function Post({ post }) {
   );
 }
 
+// ✅ Generate paths like /entertainment/egungun-of-lagos-flaunts
 export async function getStaticPaths() {
   const posts = await getAllPosts();
   const paths = posts.map(post => ({
-    params: { slug: post.slug }
+    params: {
+      category: post.category.toLowerCase().replace(/\s+/g, "-"),
+      slug: post.slug
+    }
   }));
   
   return { paths, fallback: true };
 }
 
+// ✅ Fetch post data by BOTH category + slug
 export async function getStaticProps({ params }) {
-  const post = await getPostBySlug(params.slug);
+  const post = await getPostByCategoryAndSlug(params.category, params.slug);
   
   return {
     props: { post: post || null },
-    revalidate: 60, // ✅ ISR: refresh content every 60 seconds
+    revalidate: 60, // ISR: refresh content every 60 seconds
   };
 }

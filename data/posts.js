@@ -39,7 +39,7 @@ export function getAllPosts() {
   return posts.sort((a, b) => new Date(b.date) - new Date(a.date));
 }
 
-// ✅ Get post by slug
+// ✅ Get post by slug (legacy)
 export function getPostBySlug(slug) {
   const fullPath = path.join(postsDirectory, `${slug}.md`);
   const fileContents = fs.readFileSync(fullPath, 'utf8');
@@ -53,11 +53,22 @@ export function getPostBySlug(slug) {
     author: data.author,
     category: data.category,
     tags: data.tags || [],
-    coverImage: data.image, // ✅ consistent image path
+    coverImage: data.image,
     featured: data.featured || false,
     content,
     readTime: calculateReadTime(content),
   };
+}
+
+// ✅ Get post by BOTH category and slug
+export function getPostByCategoryAndSlug(categorySlug, slug) {
+  const posts = getAllPosts();
+  const post = posts.find(
+    (p) =>
+    p.slug === slug &&
+    p.category.toLowerCase().replace(/\s+/g, '-') === categorySlug.toLowerCase()
+  );
+  return post || null;
 }
 
 // ✅ Get posts by category

@@ -146,6 +146,50 @@
   color: var(--text-color); /* theme-aware */
 }
 
+/* ✅ Category Badge Styling */
+.category {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  margin-bottom: var(--spacing-md);
+  color: var(--white);
+}
+
+/* ✅ Category-specific colors */
+.category.technology {
+  background: #2563eb; /* blue */
+}
+.category.business {
+  background: #16a34a; /* green */
+}
+.category.newsinsights {
+  background: #0ea5e9; /* cyan */
+}
+.category.education {
+  background: #9333ea; /* purple */
+}
+.category.careersjobs {
+  background: #f97316; /* orange */
+}
+.category.sports {
+  background: #dc2626; /* red */
+}
+.category.lifestyle {
+  background: #f59e0b; /* amber */
+}
+.category.health {
+  background: #ef4444; /* bright red */
+}
+.category.opinion {
+  background: #64748b; /* slate gray */
+}
+.category.entertainment {
+  background: #e11d48; /* pink-red */
+}
+
 .tags {
   display: flex;
   flex-wrap: wrap;

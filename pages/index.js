@@ -24,10 +24,20 @@ export default function Home({ featuredPosts }) {
       {/* Featured Posts */}
       <section className={`${styles.section} ${styles.featured}`}>
         <div className="container">
-          <h2 className={styles.sectionTitle}>Featured Posts</h2>
+          <h2 className={styles.sectionTitle}>🌟 Featured Posts</h2>
           <div className={styles.grid}>
-            {featuredPosts.map((post) => (
-              <PostCard key={post.slug} post={post} />
+            {featuredPosts.map((post, index) => (
+              <div
+                key={post.slug}
+                className={index === 0 ? styles.heroPost : styles.postCard}
+              >
+                <PostCard
+                  post={{
+                    ...post,
+                    url: `/${post.category.toLowerCase()}/${post.slug}`
+                  }}
+                />
+              </div>
             ))}
           </div>
         </div>
@@ -38,10 +48,10 @@ export default function Home({ featuredPosts }) {
         <div className="container">
           <h2 className={styles.sectionTitle}>Explore Topics</h2>
           <div className={styles.categoryGrid}>
-            <a href="/blog/category/technology" className={styles.categoryCard}>Technology</a>
-            <a href="/blog/category/business" className={styles.categoryCard}>Business</a>
-            <a href="/blog/category/entertainment" className={styles.categoryCard}>Entertainment</a>
-            <a href="/blog/category/lifestyle" className={styles.categoryCard}>Lifestyle</a>
+            <a href="/blog/technology" className={`${styles.categoryCard} technology`}>Technology</a>
+            <a href="/blog/business" className={`${styles.categoryCard} business`}>Business</a>
+            <a href="/blog/entertainment" className={`${styles.categoryCard} entertainment`}>Entertainment</a>
+            <a href="/blog/lifestyle" className={`${styles.categoryCard} lifestyle`}>Lifestyle</a>
           </div>
         </div>
       </section>

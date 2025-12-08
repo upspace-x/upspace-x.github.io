@@ -88,6 +88,37 @@
   margin: 0 auto;
 }
 
+/* ✅ Hero Featured Post (first item spans 2 columns) */
+.heroPost {
+  grid-column: span 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.heroPost :global(img) {
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+}
+.heroPost :global(h3) {
+  font-size: 2rem;
+  margin-top: var(--spacing-lg);
+}
+
+/* ✅ Normal post cards */
+.postCard {
+  background: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.postCard:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
 /* ✅ Categories Section */
 .categories {
   background: var(--gray-100);
@@ -192,6 +223,9 @@
 @media (max-width: 1024px) {
   .grid {
     grid-template-columns: 1fr; /* ✅ stack featured posts on tablets/mobile */
+  }
+  .heroPost {
+    grid-column: span 1; /* ✅ no spanning on smaller screens */
   }
 }
 @media (max-width: 768px) {
