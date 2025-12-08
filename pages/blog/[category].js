@@ -3,7 +3,8 @@ import Layout from '../../components/layout/Layout';
 import SEO from '../../components/seo/SEO';
 import PostCard from '../../components/blog/PostCard';
 import Pagination from '../../components/common/Pagination';
-import { getPostsByCategory, getCategories } from '../../data/posts';
+import { getPostsByCategory } from '../../lib/posts'; // ✅ FIXED import
+import { getCategories } from '../../lib/categories'; // ✅ FIXED import
 import { useState, useEffect } from 'react';
 import styles from '../../styles/Blog.module.css';
 
@@ -23,7 +24,7 @@ const categoryIcons = {
   entertainment: '🎬',
 };
 
-export default function CategoryPage({ posts, category }) {
+export default function CategoryPage({ posts, category, categories }) {
   const router = useRouter();
   const { page = '1' } = router.query;
   
@@ -50,7 +51,7 @@ export default function CategoryPage({ posts, category }) {
   const icon = categoryKey && categoryIcons[categoryKey];
   
   return (
-    <Layout showSidebar={true}>
+    <Layout showSidebar={true} posts={posts} categories={categories}>
       <SEO
         title={`${category.name} Articles - UpSpaceX`}
         description={category.description || `Explore articles in ${category.name}`}
@@ -74,7 +75,6 @@ export default function CategoryPage({ posts, category }) {
                     key={post.slug}
                     post={{
                       ...post,
-                      // ✅ Ensure PostCard links to /category/slug
                       url: `/${post.category.toLowerCase()}/${post.slug}`
                     }}
                   />
@@ -117,7 +117,8 @@ export async function getStaticProps({ params }) {
   return {
     props: {
       posts,
-      category: category || { slug: params.category, name: params.category, description: '' }
+      category: category || { slug: params.category, name: params.category, description: '' },
+      categories
     }
   };
 }
