@@ -3,18 +3,18 @@ import { format } from 'date-fns';
 import Layout from '../../components/layout/Layout';
 import SEO from '../../components/seo/SEO';
 import { getAllPosts, getPostByCategoryAndSlug } from '../../data/posts';
+import { getCategories } from '../../lib/categories'; // ✅ add categories
 import styles from '../../styles/PostContent.module.css';
 import ReactMarkdown from 'react-markdown';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { atomDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
 
-export default function Post({ post }) {
+export default function Post({ post, allPosts, categories }) {
   const router = useRouter();
   
-  // ✅ Handle fallback state
   if (router.isFallback) {
     return (
-      <Layout showSidebar={true}>
+      <Layout showSidebar={true} posts={allPosts} categories={categories}>
         <section className={styles.section}>
           <div className="container" style={{ textAlign: 'center' }}>
             <h1>Loading…</h1>
@@ -25,10 +25,9 @@ export default function Post({ post }) {
     );
   }
   
-  // ✅ Handle missing post
   if (!post) {
     return (
-      <Layout showSidebar={true}>
+      <Layout showSidebar={true} posts={allPosts} categories={categories}>
         <section className={styles.section}>
           <div className="container" style={{ textAlign: 'center' }}>
             <h1>Post not found</h1>
@@ -40,7 +39,7 @@ export default function Post({ post }) {
   }
   
   return (
-    <Layout showSidebar={true}>
+    <Layout showSidebar={true} posts={allPosts} categories={categories}>
       <SEO
         title={`${post.title} | UpSpaceX`}
         description={post.excerpt}
@@ -52,15 +51,10 @@ export default function Post({ post }) {
       <article className={`${styles.section} ${styles.article}`}>
         <div className="container">
           <header className={styles.header}>
-            {/* ✅ Category badge */}
             <span className={`${styles.category} ${post.category.toLowerCase()}`}>
               {post.category}
             </span>
-
-            {/* ✅ Title */}
             <h1 className={styles.title}>{post.title}</h1>
-
-            {/* ✅ Meta info */}
             <div className={styles.meta}>
               <div className={styles.authorInfo}>
                 <div className={styles.authorAvatar}>
@@ -74,8 +68,6 @@ export default function Post({ post }) {
                 </div>
               </div>
             </div>
-
-            {/* ✅ Cover image */}
             {post.coverImage && (
               <img
                 src={post.coverImage}
@@ -85,7 +77,6 @@ export default function Post({ post }) {
             )}
           </header>
 
-          {/* ✅ Render Markdown with syntax highlighting */}
           <div className={styles.content}>
             <ReactMarkdown
               components={{
@@ -112,7 +103,6 @@ export default function Post({ post }) {
             </ReactMarkdown>
           </div>
 
-          {/* ✅ Tags */}
           {post.tags?.length > 0 && (
             <div className={styles.tags}>
               {post.tags.map(tag => (
@@ -128,7 +118,7 @@ export default function Post({ post }) {
 
 // ✅ Generate paths like /entertainment/egungun-of-lagos-flaunts
 export async function getStaticPaths() {
-  const posts = await getAllPosts();
+  const posts = getAllPosts();
   const paths = posts.map(post => ({
     params: {
       category: post.category.toLowerCase().replace(/\s+/g, "-"),
@@ -141,10 +131,12 @@ export async function getStaticPaths() {
 
 // ✅ Fetch post data by BOTH category + slug
 export async function getStaticProps({ params }) {
-  const post = await getPostByCategoryAndSlug(params.category, params.slug);
+  const post = getPostByCategoryAndSlug(params.category, params.slug);
+  const allPosts = getAllPosts();
+  const categories = getCategories();
   
   return {
-    props: { post: post || null },
-    revalidate: 60, // ISR: refresh content every 60 seconds
+    props: { post: post || null, allPosts, categories },
+    revalidate: 60,
   };
 }

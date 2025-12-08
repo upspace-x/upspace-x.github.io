@@ -2,7 +2,8 @@ import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
 
-const postsDirectory = path.join(process.cwd(), 'posts');
+// ✅ Correct path to your Markdown files
+const postsDirectory = path.join(process.cwd(), 'content/posts');
 
 // ✅ Helper: calculate read time (~200 words/minute)
 function calculateReadTime(text) {
@@ -39,7 +40,7 @@ export function getAllPosts() {
   return posts.sort((a, b) => new Date(b.date) - new Date(a.date));
 }
 
-// ✅ Get post by slug (legacy)
+// ✅ Get post by slug
 export function getPostBySlug(slug) {
   const fullPath = path.join(postsDirectory, `${slug}.md`);
   const fileContents = fs.readFileSync(fullPath, 'utf8');
@@ -65,8 +66,8 @@ export function getPostByCategoryAndSlug(categorySlug, slug) {
   const posts = getAllPosts();
   const post = posts.find(
     (p) =>
-    p.slug === slug &&
-    p.category.toLowerCase().replace(/\s+/g, '-') === categorySlug.toLowerCase()
+      p.slug === slug &&
+      p.category.toLowerCase().replace(/\s+/g, '-') === categorySlug.toLowerCase()
   );
   return post || null;
 }
