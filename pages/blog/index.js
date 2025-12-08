@@ -4,7 +4,7 @@ import Layout from '../../components/layout/Layout';
 import SEO from '../../components/seo/SEO';
 import PostCard from '../../components/blog/PostCard';
 import Pagination from '../../components/common/Pagination';
-import { posts } from '../../data/posts';
+import { getAllPosts } from '../../data/posts'; // ✅ FIXED import
 import styles from '../../styles/Blog.module.css';
 
 const POSTS_PER_PAGE = 9;
@@ -20,14 +20,17 @@ export default function Blog() {
     setCurrentPage(parseInt(page));
   }, [page]);
   
+  // ✅ Get all posts dynamically
+  const allPosts = getAllPosts();
+  
   // ✅ Filter posts by search query
-  const filteredPosts = search
-    ? posts.filter(post =>
-        post.title.toLowerCase().includes(search.toLowerCase()) ||
-        post.excerpt.toLowerCase().includes(search.toLowerCase()) ||
-        post.content.toLowerCase().includes(search.toLowerCase())
-      )
-    : posts;
+  const filteredPosts = search ?
+    allPosts.filter(post =>
+      post.title.toLowerCase().includes(search.toLowerCase()) ||
+      post.excerpt.toLowerCase().includes(search.toLowerCase()) ||
+      post.content.toLowerCase().includes(search.toLowerCase())
+    ) :
+    allPosts;
   
   // ✅ Calculate pagination
   const totalPages = Math.ceil(filteredPosts.length / POSTS_PER_PAGE);

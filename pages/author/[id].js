@@ -2,7 +2,7 @@ import Layout from '../../components/layout/Layout';
 import SEO from '../../components/seo/SEO';
 import PostCard from '../../components/blog/PostCard';
 import { getAuthorById, getAuthors } from '../../lib/authors';
-import { posts } from '../../data/posts';
+import { getAllPosts } from '../../data/posts';
 import styles from '../../styles/Blog.module.css';
 
 export default function AuthorPage({ author, authorPosts }) {
@@ -28,7 +28,7 @@ export default function AuthorPage({ author, authorPosts }) {
 
           <div className={styles.grid}>
             {authorPosts.map(post => (
-              <PostCard key={post.id} post={post} />
+              <PostCard key={post.slug} post={post} />
             ))}
           </div>
         </div>
@@ -42,16 +42,19 @@ export async function getStaticPaths() {
   const paths = authors.map(author => ({
     params: { id: author.id }
   }));
-
+  
   return { paths, fallback: false };
 }
 
 export async function getStaticProps({ params }) {
   const author = getAuthorById(params.id);
-  const authorPosts = posts.filter(post => 
-    post.author.toLowerCase().replace(/\s+/g, '-') === params.id
+  
+  const allPosts = getAllPosts();
+  
+  const authorPosts = allPosts.filter(
+    post => post.author.toLowerCase().replace(/\s+/g, '-') === params.id
   );
-
+  
   return {
     props: {
       author,
