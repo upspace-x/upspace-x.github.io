@@ -12,7 +12,7 @@ const Sidebar = ({ posts = [], categories = [] }) => {
         <ul className={styles.categoryList}>
           {categories.map(category => (
             <li key={category.slug}>
-              <Link href={`/blog/category/${category.slug}`} className={styles.link}>
+              <Link href={`/blog/${category.slug}`} className={styles.link}>
                 {category.name}
                 {category.count !== undefined && (
                   <span className={styles.count}>({category.count})</span>
@@ -29,7 +29,10 @@ const Sidebar = ({ posts = [], categories = [] }) => {
         <ul className={styles.postList}>
           {recentPosts.map(post => (
             <li key={post.slug}>
-              <Link href={`/blog/${post.slug}`} className={styles.link}>
+              <Link
+                href={`/${post.category.toLowerCase()}/${post.slug}`}
+                className={styles.link}
+              >
                 {post.title}
               </Link>
             </li>

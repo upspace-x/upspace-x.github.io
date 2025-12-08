@@ -39,15 +39,15 @@ const Footer = () => {
           {/* ✅ Categories */}
           <div className={styles.links}>
             <h4>Categories</h4>
-            <Link href="/blog/category/newsinsights">News & Insights</Link>
-            <Link href="/blog/category/education">Education</Link>
-            <Link href="/blog/category/careersjobs">Careers & Jobs</Link>
-            <Link href="/blog/category/technology">Technology</Link>
-            <Link href="/blog/category/business">Business</Link>
-            <Link href="/blog/category/sports">Sports</Link>
-            <Link href="/blog/category/lifestyle">Lifestyle</Link>
-            <Link href="/blog/category/health">Health</Link>
-            <Link href="/blog/category/opinion">Opinion</Link>
+            <Link href="/blog/newsinsights">News & Insights</Link>
+            <Link href="/blog/education">Education</Link>
+            <Link href="/blog/careersjobs">Careers & Jobs</Link>
+            <Link href="/blog/technology">Technology</Link>
+            <Link href="/blog/business">Business</Link>
+            <Link href="/blog/sports">Sports</Link>
+            <Link href="/blog/lifestyle">Lifestyle</Link>
+            <Link href="/blog/health">Health</Link>
+            <Link href="/blog/opinion">Opinion</Link>
           </div>
 
           {/* ❌ Newsletter removed */}

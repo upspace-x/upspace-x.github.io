@@ -5,7 +5,7 @@ const CategoryBadge = ({ category }) => {
   const slug = category.toLowerCase().replace(/\s+/g, '-');
   
   return (
-    <Link href={`/blog/category/${slug}`}>
+    <Link href={`/blog/${slug}`}>
       <span className={styles.category}>{category}</span>
     </Link>
   );
