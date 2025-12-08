@@ -29,10 +29,8 @@ const Sidebar = ({ posts = [], categories = [] }) => {
         <ul className={styles.postList}>
           {recentPosts.map(post => (
             <li key={post.slug}>
-              <Link
-                href={`/${post.category.toLowerCase()}/${post.slug}`}
-                className={styles.link}
-              >
+              {/* ✅ Use post.url instead of rebuilding */}
+              <Link href={post.url} className={styles.link}>
                 {post.title}
               </Link>
             </li>
@@ -53,4 +51,3 @@ const Sidebar = ({ posts = [], categories = [] }) => {
   );
 };
 
-export default Sidebar;

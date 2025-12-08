@@ -21,12 +21,10 @@ const PostCard = ({ post }) => {
   const categoryKey = post.category ? post.category.toLowerCase() : null;
   const icon = categoryKey && categoryIcons[categoryKey];
   
-  const postUrl = `/${categoryKey}/${post.slug}`; // ✅ correct route
-  
   return (
     <article className={styles.card}>
       {/* ✅ Cover image + category badge */}
-      <Link href={postUrl} className={styles.imageWrapper}>
+      <Link href={post.url} className={styles.imageWrapper}>
         <Image
           src={post.coverImage || '/images/posts/placeholder.jpg'}
           alt={post.title}
@@ -61,7 +59,7 @@ const PostCard = ({ post }) => {
         </div>
 
         {/* Title */}
-        <Link href={postUrl} className={styles.title}>
+        <Link href={post.url} className={styles.title}>
           {post.title}
         </Link>
 
@@ -69,7 +67,7 @@ const PostCard = ({ post }) => {
         {post.excerpt && <p className={styles.excerpt}>{post.excerpt}</p>}
 
         {/* Read more link */}
-        <Link href={postUrl} className={styles.readMore}>
+        <Link href={post.url} className={styles.readMore}>
           Read More →
         </Link>
       </div>

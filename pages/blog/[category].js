@@ -8,7 +8,7 @@ import { getCategories } from '../../lib/categories'; // ✅ FIXED import
 import { useState, useEffect } from 'react';
 import styles from '../../styles/Blog.module.css';
 
-const POSTS_PER_PAGE = 9;
+const POSTS_PER_PAGE = 12;
 
 // ✅ Category → Icon mapping
 const categoryIcons = {

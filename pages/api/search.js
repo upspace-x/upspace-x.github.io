@@ -13,12 +13,18 @@ export default function handler(req, res) {
   const query = q.trim().toLowerCase();
   const allPosts = getAllPosts();
   
-  const results = allPosts.filter(post =>
-    (post.title && post.title.toLowerCase().includes(query)) ||
-    (post.excerpt && post.excerpt.toLowerCase().includes(query)) ||
-    (post.content && post.content.toLowerCase().includes(query)) ||
-    (post.tags && post.tags.some(tag => tag.toLowerCase().includes(query)))
-  );
+  const results = allPosts
+    .filter(post =>
+      (post.title && post.title.toLowerCase().includes(query)) ||
+      (post.excerpt && post.excerpt.toLowerCase().includes(query)) ||
+      (post.content && post.content.toLowerCase().includes(query)) ||
+      (post.tags && post.tags.some(tag => tag.toLowerCase().includes(query)))
+    )
+    .map(post => ({
+      ...post,
+      // ✅ Always include the correct URL
+      url: `/${post.category.toLowerCase()}/${post.slug}`,
+    }));
   
   return res.status(200).json({ results, count: results.length });
 }

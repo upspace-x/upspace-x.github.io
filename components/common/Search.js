@@ -80,8 +80,9 @@ const Search = ({ isOpen, onClose }) => {
     return () => clearTimeout(debounce);
   }, [query]);
   
-  const handleResultClick = (slug) => {
-    router.push(`/blog/${slug}`);
+  // ✅ Use post.url directly from API
+  const handleResultClick = (post) => {
+    router.push(post.url);
     onClose();
   };
   
@@ -123,10 +124,10 @@ const Search = ({ isOpen, onClose }) => {
               <div
                 key={post.id}
                 className={styles.result}
-                onClick={() => handleResultClick(post.slug)}
+                onClick={() => handleResultClick(post)}
                 role="button"
                 tabIndex={0}
-                onKeyPress={(e) => e.key === 'Enter' && handleResultClick(post.slug)}
+                onKeyPress={(e) => e.key === 'Enter' && handleResultClick(post)}
               >
                 <h3>{post.title}</h3>
                 <p>{post.excerpt}</p>

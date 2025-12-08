@@ -48,6 +48,7 @@ const Footer = () => {
             <Link href="/blog/lifestyle">Lifestyle</Link>
             <Link href="/blog/health">Health</Link>
             <Link href="/blog/opinion">Opinion</Link>
+            <Link href="/blog/entertainment">Entertainment</Link> {/* ✅ Added */}
           </div>
 
           {/* ❌ Newsletter removed */}
