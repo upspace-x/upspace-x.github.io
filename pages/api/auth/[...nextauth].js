@@ -11,9 +11,12 @@ export default NextAuth({
   pages: {
     signIn: '/auth/signin',
   },
+  secret: process.env.NEXTAUTH_SECRET, // ✅ add this line
   callbacks: {
     async session({ session, token }) {
-      session.user.id = token.sub;
+      if (token?.sub) {
+        session.user.id = token.sub;
+      }
       return session;
     },
   },
