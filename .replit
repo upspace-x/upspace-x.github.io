@@ -37,3 +37,10 @@ externalPort = 80
 deploymentTarget = "autoscale"
 run = ["npm", "run", "start", "--", "-p", "5000", "-H", "0.0.0.0"]
 build = ["npm", "run", "build"]
+
+[userenv]
+
+[userenv.shared]
+NEXT_PUBLIC_SITE_NAME = "UpSpaceX"
+NEXT_PUBLIC_SITE_URL = "https://upspacex.vercel.app"
+NEXT_PUBLIC_API_BASE = "https://upspacex.vercel.app/api"
