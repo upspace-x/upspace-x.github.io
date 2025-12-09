@@ -46,6 +46,7 @@ web_modules/
 .env
 .env.*
 !.env.example
+.env.local   # ✅ explicitly ignore local secrets
 
 # Next.js build output
 .next/
