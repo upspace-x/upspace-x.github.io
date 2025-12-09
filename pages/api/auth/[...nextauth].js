@@ -9,13 +9,14 @@ export default NextAuth({
     }),
   ],
   pages: {
-    signIn: '/auth/signin',
+    signIn: '/auth/signin', // optional custom sign-in page
   },
-  secret: process.env.NEXTAUTH_SECRET, // ✅ add this line
+  secret: process.env.NEXTAUTH_SECRET, // ✅ required for encryption
+  debug: true, // ✅ helpful for deployment logs
   callbacks: {
     async session({ session, token }) {
       if (token?.sub) {
-        session.user.id = token.sub;
+        session.user.id = token.sub; // attach user ID from token
       }
       return session;
     },
