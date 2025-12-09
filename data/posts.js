@@ -21,6 +21,7 @@ export function getAllPosts() {
     const fileContents = fs.readFileSync(fullPath, 'utf8');
     const { data, content } = matter(fileContents);
     
+    const categorySlug = data.category ? data.category.toLowerCase().replace(/\s+/g, '-') : 'uncategorized';
     return {
       slug,
       title: data.title,
@@ -29,10 +30,11 @@ export function getAllPosts() {
       author: data.author,
       category: data.category,
       tags: data.tags || [],
-      coverImage: data.image, // ✅ always /images/posts/...jpg
+      coverImage: data.image,
       featured: data.featured || false,
       content,
       readTime: calculateReadTime(content),
+      url: `/${categorySlug}/${slug}`,
     };
   });
   
@@ -46,6 +48,7 @@ export function getPostBySlug(slug) {
   const fileContents = fs.readFileSync(fullPath, 'utf8');
   const { data, content } = matter(fileContents);
   
+  const categorySlug = data.category ? data.category.toLowerCase().replace(/\s+/g, '-') : 'uncategorized';
   return {
     slug,
     title: data.title,
@@ -58,6 +61,7 @@ export function getPostBySlug(slug) {
     featured: data.featured || false,
     content,
     readTime: calculateReadTime(content),
+    url: `/${categorySlug}/${slug}`,
   };
 }
 

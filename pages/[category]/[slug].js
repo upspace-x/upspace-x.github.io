@@ -7,7 +7,7 @@ import { getCategories } from '../../lib/categories'; // ✅ add categories
 import styles from '../../styles/PostContent.module.css';
 import ReactMarkdown from 'react-markdown';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
-import { atomDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
+import { atomDark } from 'react-syntax-highlighter/dist/cjs/styles/prism';
 
 export default function Post({ post, allPosts, categories }) {
   const router = useRouter();
