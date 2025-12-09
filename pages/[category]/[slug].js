@@ -3,7 +3,7 @@ import { format } from 'date-fns';
 import Layout from '../../components/layout/Layout';
 import SEO from '../../components/seo/SEO';
 import { getAllPosts, getPostByCategoryAndSlug } from '../../data/posts';
-import { getCategories } from '../../lib/categories'; // ✅ add categories
+import { getCategories } from '../../lib/categories';
 import styles from '../../styles/PostContent.module.css';
 import ReactMarkdown from 'react-markdown';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
@@ -11,7 +11,7 @@ import { atomDark } from 'react-syntax-highlighter/dist/cjs/styles/prism';
 
 export default function Post({ post, allPosts, categories }) {
   const router = useRouter();
-  
+
   if (router.isFallback) {
     return (
       <Layout showSidebar={true} posts={allPosts} categories={categories}>
@@ -24,7 +24,7 @@ export default function Post({ post, allPosts, categories }) {
       </Layout>
     );
   }
-  
+
   if (!post) {
     return (
       <Layout showSidebar={true} posts={allPosts} categories={categories}>
@@ -37,7 +37,7 @@ export default function Post({ post, allPosts, categories }) {
       </Layout>
     );
   }
-  
+
   return (
     <Layout showSidebar={true} posts={allPosts} categories={categories}>
       <SEO
@@ -51,14 +51,14 @@ export default function Post({ post, allPosts, categories }) {
       <article className={`${styles.section} ${styles.article}`}>
         <div className="container">
           <header className={styles.header}>
-            <span className={`${styles.category} ${post.category.toLowerCase()}`}>
+            <span className={`${styles.category} ${post.category?.toLowerCase()}`}>
               {post.category}
             </span>
             <h1 className={styles.title}>{post.title}</h1>
             <div className={styles.meta}>
               <div className={styles.authorInfo}>
                 <div className={styles.authorAvatar}>
-                  {post.author.charAt(0).toUpperCase()}
+                  {post.author ? post.author.charAt(0).toUpperCase() : "?"}
                 </div>
                 <div className={styles.authorDetails}>
                   <p className={styles.authorName}>{post.author}</p>
@@ -122,11 +122,11 @@ export async function getStaticPaths() {
   const paths = posts.map(post => ({
     params: {
       category: post.category.toLowerCase().replace(/\s+/g, "-"),
-      slug: post.slug
-    }
+      slug: post.slug,
+    },
   }));
-  
-  return { paths, fallback: true };
+
+  return { paths, fallback: true }; // or 'blocking' if you prefer
 }
 
 // ✅ Fetch post data by BOTH category + slug
@@ -134,7 +134,7 @@ export async function getStaticProps({ params }) {
   const post = getPostByCategoryAndSlug(params.category, params.slug);
   const allPosts = getAllPosts();
   const categories = getCategories();
-  
+
   return {
     props: { post: post || null, allPosts, categories },
     revalidate: 60,

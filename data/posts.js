@@ -11,17 +11,23 @@ function calculateReadTime(text) {
   return Math.ceil(words / 200);
 }
 
+// ✅ Normalize category slug
+function normalizeCategory(category) {
+  return category ? category.toLowerCase().replace(/\s+/g, '-') : 'uncategorized';
+}
+
 // ✅ Get all posts
 export function getAllPosts() {
   const fileNames = fs.readdirSync(postsDirectory);
-  
+
   const posts = fileNames.map((fileName) => {
     const slug = fileName.replace(/\.md$/, '');
     const fullPath = path.join(postsDirectory, fileName);
     const fileContents = fs.readFileSync(fullPath, 'utf8');
     const { data, content } = matter(fileContents);
-    
-    const categorySlug = data.category ? data.category.toLowerCase().replace(/\s+/g, '-') : 'uncategorized';
+
+    const categorySlug = normalizeCategory(data.category);
+
     return {
       slug,
       title: data.title,
@@ -34,21 +40,22 @@ export function getAllPosts() {
       featured: data.featured || false,
       content,
       readTime: calculateReadTime(content),
-      url: `/${categorySlug}/${slug}`,
+      url: `/${categorySlug}/${slug}`, // ✅ fixed
     };
   });
-  
+
   // Sort newest first
   return posts.sort((a, b) => new Date(b.date) - new Date(a.date));
 }
 
 // ✅ Get post by slug
 export function getPostBySlug(slug) {
-  const fullPath = path.join(postsDirectory, `${slug}.md`);
+  const fullPath = path.join(postsDirectory, `${slug}.md`); // ✅ fixed
   const fileContents = fs.readFileSync(fullPath, 'utf8');
   const { data, content } = matter(fileContents);
-  
-  const categorySlug = data.category ? data.category.toLowerCase().replace(/\s+/g, '-') : 'uncategorized';
+
+  const categorySlug = normalizeCategory(data.category);
+
   return {
     slug,
     title: data.title,
@@ -61,7 +68,7 @@ export function getPostBySlug(slug) {
     featured: data.featured || false,
     content,
     readTime: calculateReadTime(content),
-    url: `/${categorySlug}/${slug}`,
+    url: `/${categorySlug}/${slug}`, // ✅ fixed
   };
 }
 
@@ -71,7 +78,7 @@ export function getPostByCategoryAndSlug(categorySlug, slug) {
   const post = posts.find(
     (p) =>
       p.slug === slug &&
-      p.category.toLowerCase().replace(/\s+/g, '-') === categorySlug.toLowerCase()
+      normalizeCategory(p.category) === categorySlug.toLowerCase()
   );
   return post || null;
 }
@@ -80,7 +87,7 @@ export function getPostByCategoryAndSlug(categorySlug, slug) {
 export function getPostsByCategory(categorySlug) {
   const posts = getAllPosts();
   return posts.filter(
-    (post) => post.category.toLowerCase() === categorySlug.toLowerCase()
+    (post) => normalizeCategory(post.category) === categorySlug.toLowerCase()
   );
 }
 
