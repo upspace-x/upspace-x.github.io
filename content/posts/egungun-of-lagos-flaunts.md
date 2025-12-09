@@ -2,7 +2,7 @@
 title: "'I studied Biology in uni, I know at least names of 195 bones offhand': Egungun of Lagos flaunts brilliance in new clip (Watch)."
 date: "2025-12-07"
 excerpt: "Egungun of Lagos surprises fans by flaunting his knowledge of human bones in a viral clip."
-author: "Quadri"
+author: "UpSpaceX"
 category: "Entertainment"
 tags: ["Egungun of Lagos", "Instagram", "viral", "bones", "humour"]
 image: "/images/posts/egungun-of-lagos-flaunts.jpg"
