@@ -3,7 +3,7 @@ title: "JUST IN: Senate approves Tinubu's request to deploy Nigerian troops to B
 date: "2025-12-09"
 author: "UpSpaceX"
 excerpt: "The Nigerian Senate has approved President Bola Ahmed Tinubu’s request to deploy troops to Benin Republic for a peace mission following an attempted coup."
-category: "News & Insight"
+category: "News & Insights"
 tags: [
   "Nigeria",
   "Senate",
