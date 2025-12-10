@@ -13,7 +13,7 @@ tags: [
   "West Africa",
   "Security"
 ]
-image: "/images/posts/tinubu-benin-deployment.jpeg"
+image: "/images/posts/tinubu-benin-deployment.jpg"
 featured: true
 ---
 
